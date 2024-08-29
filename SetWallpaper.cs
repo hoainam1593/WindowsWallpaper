@@ -1,0 +1,19 @@
+﻿using System.Runtime.InteropServices;
+
+namespace WindowsWallpaper
+{
+    internal class SetWallpaper
+    {
+        private const int SPI_SETDESKWALLPAPER = 20;
+        private const int SPIF_UPDATEINIFILE = 0x01;
+        private const int SPIF_SENDCHANGE = 0x02;
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+
+        public static void Set(string imgPath)
+        {
+            SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, imgPath, SPIF_UPDATEINIFILE | SPIF_SENDCHANGE);
+        }
+    }
+}
