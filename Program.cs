@@ -1,10 +1,16 @@
-﻿namespace WindowsWallpaper
+﻿using WindowsWallpaper.ImageProviders;
+
+namespace WindowsWallpaper
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            SetWallpaper.Set("E:/test.png");
+            var provider = new ImageProvider_Unsplash();
+
+            var l = await provider.GetListImages();
+
+            File.WriteAllText("E:/test.json", l[0]);
         }
     }
 }
