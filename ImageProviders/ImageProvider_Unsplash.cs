@@ -15,7 +15,7 @@
         public async Task<List<string>> GetListImages()
         {
             var urlBuilder = new UrlBuilder(baseUrl, action, param);
-            var json = await GetTextFromServer.Get(urlBuilder.Url);
+            var json = await Downloader.DownloadText(urlBuilder.Url);
             return new List<string>() { json };
         }
     }
