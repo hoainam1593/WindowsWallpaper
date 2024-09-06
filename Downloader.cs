@@ -2,10 +2,15 @@
 {
     internal class Downloader
     {
-        public static async Task<string> DownloadText(string url)
+        public static async Task<string> DownloadText(string url, string apiKey=null)
         {
             using (var client = new HttpClient())
             {
+                if (!string.IsNullOrEmpty(apiKey))
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", apiKey);
+                }
+
                 var res = await client.GetAsync(url);
                 return await res.Content.ReadAsStringAsync();
             }
